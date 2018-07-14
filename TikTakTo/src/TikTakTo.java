@@ -1,6 +1,7 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Random;
-import java.util.Scanner;
 
 public class TikTakTo {
 	
@@ -60,20 +61,22 @@ public class TikTakTo {
 	//Game start function
 	public void run() throws IOException{
 		while(checkWin() == -1) { //while no-one won yet
+			clearScreen();
 			printBoard();
+			System.out.printf("Player %d turn\n", currTurn+1);
 			performTurn(currTurn);
 			currTurn = (currTurn+1) % NUM_OF_PLAYERS;
 		}
 	}
 	
 	//Turn management
-	private TurnStatus performTurn(int playerNum) {
+	private TurnStatus performTurn(int playerNum) throws IOException{
 		TurnStatus status = TurnStatus.SUCCESS;
 		
 		//get move from user
 		System.out.printf("Enter a move: ");
-		Scanner reader = new Scanner(System.in);
-		String moveStr = reader.nextLine();
+		BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
+		String moveStr = bufferReader.readLine();
 		Move move = new Move(moveStr);
 		if(move.status == Move.MoveStatus.MOVE_OK) {
 			//if move is valid check if the square is vacant
@@ -87,7 +90,6 @@ public class TikTakTo {
 		else {
 			status = TurnStatus.ILLEGAL;
 		}
-		reader.close();
 		return status;
 	}
 	
@@ -118,5 +120,10 @@ public class TikTakTo {
 			System.out.printf("\n");
 		}
 	}
+	
+	//clear screen
+	public static void clearScreen() throws IOException{  
+		
+	} 
 }
 
