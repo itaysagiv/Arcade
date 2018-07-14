@@ -56,8 +56,10 @@ public class TikTakTo {
 			}
 			if(i != BOARD_DIM - 1) {
 				System.out.printf("\n");
-				for (int j = 0; j < BOARD_DIM; j++) {
-					
+				for (int j = -1; j < BOARD_DIM; j++) {
+					System.out.printf("---");
+					if(j != BOARD_DIM - 1)
+						System.out.printf("+");
 				}
 				System.out.printf("\n");
 			}
